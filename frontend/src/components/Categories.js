@@ -6,7 +6,6 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import { Button } from 'react-bootstrap';
 
-
 class Categories extends Component {
 
     constructor(props) {
@@ -14,7 +13,7 @@ class Categories extends Component {
         this.state = {
             selectValue: '' 
         }
-    }
+    }  
 
     updateValue(newValue) {
         this.setState({
@@ -40,7 +39,7 @@ class Categories extends Component {
         <div>
             <div className="section">
             <h4 className="section-heading">Please select one of the categories below...</h4>
-            <Select
+             <Select
                 id="category-select"
                 autoFocus
                 onBlurResetsInput={false}
@@ -55,7 +54,7 @@ class Categories extends Component {
                 disabled={false}
                 placeholder="Categories"
             />
-            <Button className="get-posts" bsStyle="primary" onClick={this.readPosts.bind(this)}>Read Posts</Button>
+            <Button className="get-posts" bsStyle="primary" onClick={this.readPosts.bind(this)}>Read Posts</Button> 
             </div>
         </div>
     )};
