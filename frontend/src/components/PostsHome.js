@@ -8,10 +8,10 @@ import CategoryPosts from './CategoryPosts';
 
 class PostsHome extends Component {
 
-    componentDidMount() {
-        this.props.fetchAllCategories();
-        this.props.fetchAllPosts();
-    }
+    // componentDidMount() {
+    //     this.props.fetchAllCategories();
+    //     this.props.fetchAllPosts();
+    // }
 
     render() {
         return (

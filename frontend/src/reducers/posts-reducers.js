@@ -7,7 +7,6 @@ export const PostsReducer = (state = [], action) => {
             return action.result;
         case types.CREATE_NEW_POST:
             let { post } = action;
-            console.log(state);
             return {
                 ...state, ...state.push(post)
             }
