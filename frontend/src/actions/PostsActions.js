@@ -68,7 +68,6 @@ export function upvotePost(postId) {
             }
         ).then(response => response.json())
         .then(result => {
-            console.log(result);
             dispatch({
                 type: types.UPVOTE_POST,
                 result
