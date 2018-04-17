@@ -3,13 +3,21 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchPostComments } from '../actions/CommentsActions';
 import { Glyphicon } from 'react-bootstrap';
-import { upvotePost,  downvotePost} from '../actions/PostsActions';
-import { upvoteComment,  downvoteComment, deleteComment} from '../actions/CommentsActions';
+import { upvotePost,  downvotePost } from '../actions/PostsActions';
+import { upvoteComment,  downvoteComment, deleteComment, addPostComment } from '../actions/CommentsActions';
+import { DebounceInput } from "react-debounce-input";
+import v4 from 'uuid/v4';
 
 class PostDetails extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            commentAuthor: '',
+            comment: '',
+        }
+    }
     componentDidMount() {
         let postId = this.props.match.params.postId;
-        console.log(postId);
         this.props.dispatch(fetchPostComments(postId));
     }
 
@@ -35,6 +43,23 @@ class PostDetails extends Component {
 
     editPostComment(commentId) {
 
+    }
+
+    addPostComment() {
+        let postId = this.props.match.params.postId;
+        let comment = {
+            id: v4(),
+            timestamp: Date.now(),
+            body: this.state.comment,
+            author: this.state.commentAuthor,
+            parentId: postId
+        };
+        this.props.dispatch(addPostComment(comment)).then(result => {
+            this.setState({
+                commentAuthor: '',
+                comment: '',
+            })
+        })
     }
 
     render() {
@@ -69,7 +94,17 @@ class PostDetails extends Component {
                        <Glyphicon onClick={this.deletePostComment.bind(this, comment.id)} glyph="glyphicon glyphicon-remove"></Glyphicon>&nbsp;&nbsp;&nbsp;
                        </span>
                     </span>
-            })}
+                    })}
+                    <br/>
+                    <br/>
+                    <div className='new-post-comment'>
+                        <DebounceInput debounceTimeout={300} type='text' name='author' value={this.state.commentAuthor} placeholder={'Author Name'} onChange={(e) => this.setState({ commentAuthor : e.target.value })}/>
+                        <br/>
+                        <br/>
+                        <DebounceInput debounceTimeout={300} element='textarea' name='comment' value={this.state.comment} placeholder={'Enter Comment Here'} onChange={(e) => this.setState({ comment: e.target.value })}/>
+                        <br/>
+                        <button onClick={this.addPostComment.bind(this)}><span className="glyphicon glyphicon-plus"></span>&nbsp;Add Comment</button>
+                    </div>
                 </div>
             )
     }

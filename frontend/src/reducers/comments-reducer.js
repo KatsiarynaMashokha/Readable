@@ -20,6 +20,9 @@ export const CommentsReducer = (state = [], action) => {
         case types.DELETE_COMMENT:
             commentId = action.result.id;
             return state.filter(comment => comment.id !== commentId);
+        case types.ADD_POST_COMMENT:
+            let comment = action.result;
+            return [...state], [...state, comment]
         default:
             return state;
     }

@@ -75,3 +75,22 @@ export function deleteComment(commentId) {
         })
     }
 }
+
+export function addPostComment(comment) {
+    return dispatch => {
+        return fetch(
+            ROOT_URL + COMMENTS,
+            {
+                method: 'POST',
+                headers: AUTHORIZATION_HEADERS,
+                body: JSON.stringify(comment)
+            }
+        ).then(response => response.json())
+        .then(result => {
+            dispatch({
+                type: types.ADD_POST_COMMENT,
+                result: {...result}
+            })
+        })
+    }
+}
