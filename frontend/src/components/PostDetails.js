@@ -7,6 +7,7 @@ import { upvotePost,  downvotePost } from '../actions/PostsActions';
 import { upvoteComment,  downvoteComment, deleteComment, addPostComment } from '../actions/CommentsActions';
 import { DebounceInput } from "react-debounce-input";
 import v4 from 'uuid/v4';
+import { convertUnixTime } from '../util';
 
 class PostDetails extends Component {
     constructor(props) {
@@ -70,14 +71,14 @@ class PostDetails extends Component {
                    {currentPost && 
                    <span>
                        <h3 className='post-title'>{currentPost.title}</h3>
-                       <p className='post-details'>submitted on {currentPost.timestamp} by {currentPost.author}</p>
+                       <p className='post-details'>submitted on {convertUnixTime(currentPost.timestamp)} by {currentPost.author}</p>
                        <h4 className='post-body'>{currentPost.body}</h4>
                        <Glyphicon onClick={this.upvotePost.bind(this, currentPost.id)} glyph="glyphicon glyphicon-thumbs-up"></Glyphicon>&nbsp;&nbsp;&nbsp;
                        {currentPost.voteScore}&nbsp;&nbsp;&nbsp;
                        <Glyphicon onClick={this.downvotePost.bind(this, currentPost.id)} glyph="glyphicon glyphicon-thumbs-down"></Glyphicon>
                        <br/>
                        <br/>
-                       {currentPost.commentCount ? <p>{currentPost.commentCount} comment(s)</p> : <p>No Comments</p>}
+                       {this.props.comments.length ? <p>{this.props.comments.length} comment(s)</p> : <p>No Comments</p>}
                        <hr/>
                    </span>
                 }   
@@ -85,7 +86,7 @@ class PostDetails extends Component {
                    {this.props.comments.length && this.props.comments.map(comment => {
                 return <span key={comment.id}>
                     <br/>
-                    <p className='comment-details'>{comment.author} on {comment.timestamp}</p>
+                    <p className='comment-details'>{comment.author} on {convertUnixTime(comment.timestamp)}</p>
                     <p className='comment-body'>{comment.body}</p>
                     <span className='comment-votes'><Glyphicon onClick={this.upvotePostComment.bind(this, comment.id)} glyph="glyphicon glyphicon-thumbs-up"></Glyphicon>&nbsp;&nbsp;&nbsp;
                        {comment.voteScore}&nbsp;&nbsp;&nbsp;
