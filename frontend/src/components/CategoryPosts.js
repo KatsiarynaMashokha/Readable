@@ -26,7 +26,6 @@ class CategoryPosts extends Component {
     }
 
     render() {
-
         if(this.props.location.pathname === '/') {
             return (
                 <div>{this.props.posts.length && this.props.posts.map((post, idx) => <p key={idx}>{post.title}<br/>by {post.author}  

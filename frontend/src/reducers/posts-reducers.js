@@ -25,6 +25,14 @@ export const PostsReducer = (state = [], action) => {
                 if(post.id === postId) post.voteScore--;
                 return post;
             });
+        case types.SORT_POSTS_BY_VOTE_SCORE:
+            return state.slice().sort((a, b) => {
+                return a.voteScore < b.voteScore
+            })
+        case types.SORT_POSTS_BY_TIMESTAMP:
+            return state.slice().sort((a, b) => {
+                return a.timestamp < b.timestamp
+            })
         default:
             return state
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchPostsForCategory } from '../actions/CategoryActions';
+import { sortPostsByVotes, sortPostsByTimestamp } from '../actions/PostsActions';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import { Button } from 'react-bootstrap';
@@ -54,7 +54,12 @@ class Categories extends Component {
                 disabled={false}
                 placeholder="Categories"
             />
-            <Button className="get-posts" bsStyle="primary" onClick={this.readPosts.bind(this)}>Read Posts</Button> 
+            <Button className="get-posts" bsStyle="primary" onClick={this.readPosts.bind(this)}>Read Posts</Button>
+            <div className='sort-buttons'>
+                <p>Sort by:</p>
+                <Button className='sort-btn' onClick={this.props.sortPostsByTimestamp}>most recent</Button>
+                <Button className='sort-btn' onClick={this.props.sortPostsByVotes}>most voted</Button>
+            </div>
             </div>
         </div>
     )};
@@ -65,7 +70,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapsDispatchToProps = (dispatch) => ({
-    fetchPostsForCategory: (category) => dispatch(fetchPostsForCategory(category))
+    sortPostsByVotes: () => dispatch(sortPostsByVotes()),
+    sortPostsByTimestamp: () => dispatch(sortPostsByTimestamp()),
 })
 
 export default withRouter(connect(mapStateToProps, mapsDispatchToProps)(Categories));

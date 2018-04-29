@@ -87,11 +87,24 @@ export function downvotePost(postId) {
             }
         ).then(response => response.json())
         .then(result => {
-            console.log(result);
             dispatch({
                 type: types.DOWNVOTE_POST,
                 result
             })
         })
+    }
+}
+
+export function sortPostsByVotes() {
+    return {
+        type: types.SORT_POSTS_BY_VOTE_SCORE,
+        result: {}
+    }
+}
+
+export function sortPostsByTimestamp() {
+    return {
+        type: types.SORT_POSTS_BY_TIMESTAMP,
+        result: {}
     }
 }
