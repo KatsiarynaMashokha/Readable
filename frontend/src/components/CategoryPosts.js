@@ -30,7 +30,7 @@ class CategoryPosts extends Component {
         if(this.props.location.pathname === '/') {
             return (
                 <div>{this.props.posts.length && this.props.posts.map((post, idx) => <p key={idx}>{post.title}<br/>by {post.author}  
-                <Link to = {`/post/${post.id}`}> read...</Link></p>)}</div>
+                <Link to = {`/${post.category}/post/${post.id}/`}> read...</Link></p>)}</div>
             );
         }
 
