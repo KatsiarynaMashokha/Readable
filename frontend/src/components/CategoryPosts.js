@@ -42,10 +42,12 @@ class CategoryPosts extends Component {
                     <Panel.Body>{post.body}</Panel.Body>
                     <Panel.Footer>by {post.author} on {convertUnixTime(post.timestamp)}&nbsp;&nbsp;&nbsp;{post.voteScore} <Glyphicon onClick={this.upvote.bind(this, post.id)} glyph="glyphicon glyphicon-thumbs-up"></Glyphicon>&nbsp;&nbsp;<Glyphicon onClick={this.downvote.bind(this, post.id)} glyph="glyphicon glyphicon-thumbs-down"></Glyphicon>
                     </Panel.Footer>
-                    <Link to={post.category + '/edit/' + post.id} className='button'>Edit</Link>
-                    <a onClick={this.deletePost.bind(this, post.id)} className='button'>Delete</a>
-                    <Link to={post.category + '/post/' + post.id} 
-                    className='button'>Read More</Link>
+                    <div className='post-action-btns'>
+                        <Link to={post.category + '/edit/' + post.id} id='btn-edit' className='button'>Edit</Link>
+                        <a onClick={this.deletePost.bind(this, post.id)} id='btn-delete' className='button' >Delete</a>
+                        <Link to={post.category + '/post/' + post.id}
+                        id='btn-read' className='button'>Read More</Link>
+                    </div>
                 </Panel>
                 ): 'No posts in this category'}
             </div>
@@ -54,7 +56,6 @@ class CategoryPosts extends Component {
 }
 
 const mapStateToProps = state => ({
-    currentPosts: state.currentPosts,
     posts: state.posts
 });
 

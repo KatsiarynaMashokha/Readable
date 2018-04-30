@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-.App-header {
-
-}
-
 .App-title {
   font-size: 1.5em;
   margin-bottom: 80px;
@@ -36,6 +32,7 @@ body {
   width: 500px;
   margin-left: auto;
   margin-right: auto;
+  height: 175px;
 }
 
 .button {
@@ -53,18 +50,16 @@ body {
 
 nav {
   background: lightgrey;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .post-title {
   margin-top: 50px;
-  /* background-color: tomato; */
-  /* color: white; */
-  /* padding: 10px; */
 }
 
 .post-body {
   margin-top: 30px;
-  /* border: 1px solid lightgray; */
   padding: 10px;
   border-radius: 5px;
 }
@@ -72,11 +67,6 @@ nav {
 .post-details {
   color: grey;
 }
-
-/* .glyphicon glyphicon-thumbs-down:hover {
-  font-size: 50px;
-  color: yellow;
-} */
 
 .comment-details {
   text-align: left;
@@ -103,5 +93,40 @@ nav {
 }
 
 nav {
+  margin-bottom: 20px;
+}
+
+input, textarea {
+  margin-left: 10px;
+  width: 250px;
+}
+
+.post-action-btns {
+  margin-top: 10px;
+}
+
+#btn-edit {
+  color: white;
+  background: #5bc0de;
+}
+
+#btn-delete {
+  color: white;
+  background: #d9534f;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+#btn-read {
+  color: white;
+  background: #5cb85c;
+}
+
+.new-post-comment textarea, input {
+  border-radius: 5px;
+}
+
+.new-post-comment {
+  margin-top: 20px;
   margin-bottom: 20px;
 }

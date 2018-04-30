@@ -8,6 +8,7 @@ import { upvoteComment,  downvoteComment, deleteComment, addPostComment } from '
 import { DebounceInput } from "react-debounce-input";
 import v4 from 'uuid/v4';
 import { convertUnixTime } from '../util';
+import { Button } from 'react-bootstrap';
 
 class PostDetails extends Component {
     constructor(props) {
@@ -43,6 +44,7 @@ class PostDetails extends Component {
     }
 
     editPostComment(commentId) {
+        console.log('editComment')
 
     }
 
@@ -83,7 +85,7 @@ class PostDetails extends Component {
                    </span>
                 }   
                 
-                   {this.props.comments.length && this.props.comments.map(comment => {
+                   {this.props.comments && this.props.comments.map(comment => {
                 return <span key={comment.id}>
                     <br/>
                     <p className='comment-details'>{comment.author} on {convertUnixTime(comment.timestamp)}</p>
@@ -99,12 +101,14 @@ class PostDetails extends Component {
                     <br/>
                     <br/>
                     <div className='new-post-comment'>
-                        <DebounceInput debounceTimeout={300} type='text' name='author' value={this.state.commentAuthor} placeholder={'Author Name'} onChange={(e) => this.setState({ commentAuthor : e.target.value })}/>
+                        <DebounceInput debounceTimeout={300} type='text' name='author' value={this.state.commentAuthor} placeholder={'Author'} onChange={(e) => this.setState({ commentAuthor : e.target.value })}/>
                         <br/>
                         <br/>
-                        <DebounceInput debounceTimeout={300} element='textarea' name='comment' value={this.state.comment} placeholder={'Enter Comment Here'} onChange={(e) => this.setState({ comment: e.target.value })}/>
+                        <DebounceInput debounceTimeout={300} element='textarea' name='comment' value={this.state.comment} placeholder={'Enter comment here'} onChange={(e) => this.setState({ comment: e.target.value })}/>
                         <br/>
-                        <button onClick={this.addPostComment.bind(this)}><span className="glyphicon glyphicon-plus"></span>&nbsp;Add Comment</button>
+                        <br/>
+                        <Button bsStyle="primary" onClick={this.addPostComment.bind(this)}>Add Comment</Button>
+                        <br/>
                     </div>
                 </div>
             )
