@@ -14,7 +14,7 @@ class CategoryPosts extends Component {
     }
 
     deletePost(postId) {
-        this.props.deletePost(postId);
+        if (window.confirm('Are you sure you wont to delete this post?')) this.props.deletePost(postId);
     }
 
     upvote(postId) {

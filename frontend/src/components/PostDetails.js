@@ -39,7 +39,7 @@ class PostDetails extends Component {
     }
 
     deletePostComment(commentId) {
-        this.props.dispatch(deleteComment(commentId));
+        if(window.confirm('Are you sure you want to delete this comment?')) this.props.dispatch(deleteComment(commentId));
     }
 
     editPostComment(commentId) {
