@@ -36,7 +36,7 @@ class CategoryPosts extends Component {
         let selectedCategory = this.props.location.pathname.replace(/\//g,'');
         let postsForCategory = this.props.posts.filter(post => post.category === selectedCategory);
         return (
-            <div>{postsForCategory.length && postsForCategory.map((post, idx) => 
+            <div>{postsForCategory.length ? postsForCategory.map((post, idx) =>
                 <Panel key={idx} className='post-panel'>
                     <Panel.Heading>{post.title}</Panel.Heading>
                     <Panel.Body>{post.body}</Panel.Body>
@@ -47,7 +47,7 @@ class CategoryPosts extends Component {
                     <Link to={post.category + '/post/' + post.id} 
                     className='button'>Read More</Link>
                 </Panel>
-                )}
+                ): 'No posts in this category'}
             </div>
         );
     }
