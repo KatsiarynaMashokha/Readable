@@ -51,7 +51,7 @@ class PostForm extends Component {
             })
         }).then(() => window.alert('New post has been added'))
         .then(() => {
-            window.location = '/';
+             window.location = '/';
         })
     }
 
@@ -105,14 +105,14 @@ class PostForm extends Component {
                         <DebounceInput debounceTimeout={300} type='text' name='author' onChange={(e) => this.setState({ author: e.target.value })} value={this.state.author} required/>
                     </label>
                     <br /><br />
-                    <label>
+                    {this.props.categories.length && <label>
                         Category:&nbsp;
-                        <select value={this.state.category} onChange={(e) => this.setState({ category: e.target.value })}>
+                        <select value={this.props.categories[0].name} onChange={(e) => this.setState({ category: e.target.value })}>
                             {this.props.categories.length && this.props.categories.map(category => {
                                 return <option value={category.name} key={category.name}>{category.name}</option>
                             })}
                         </select>
-                    </label>
+                    </label>}
                     <br /><br />
                     <Button bsStyle="primary" type='submit' value='Submit' onClick={this.handleSudmit.bind(this)} disabled={(this.state.title && this.state.body && this.state.author) ? false : true}>Submit</Button>
                 </span>}
