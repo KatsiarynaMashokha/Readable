@@ -4,7 +4,7 @@
 
 .App-title {
   font-size: 1.5em;
-  margin-bottom: 80px;
+  margin-bottom: 20px;
 }
 
 body {
@@ -52,6 +52,7 @@ nav {
   background: lightgrey;
   padding-top: 5px;
   padding-bottom: 5px;
+  margin-top: 60px;
 }
 
 .post-title {
@@ -136,4 +137,8 @@ input, textarea {
   color: #333333;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 20px;
+}
+
+.categories-description {
+  color: #696969;
 }

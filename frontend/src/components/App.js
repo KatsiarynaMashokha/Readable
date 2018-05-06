@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, withRouter, Link } from 'react-router-dom';
 import PostsHome from './PostsHome';
+import { connect } from 'react-redux';
 import CategoryPosts from './CategoryPosts';
 import PostForm from './PostForm';
 import PostDetails from './PostDetails';
@@ -8,10 +9,12 @@ import Main from './Main';
 
 class App extends Component {
   render() {
+
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Welcome to Forum</h1>
+          {this.props.categories.length && <span className='categories-description'>We are discussing {this.props.categories.map(category => <Link to={`/${category.path}`} key={category.path}>{' ' + category.name}</Link>)}</span>}
           <nav>
               <Link to="/">Home</Link>
               <br />
@@ -31,4 +34,8 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+const mapStateToProps = state => ({
+  categories: state.categories,
+});
+
+export default withRouter(connect(mapStateToProps)(App));
