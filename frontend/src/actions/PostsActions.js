@@ -108,3 +108,26 @@ export function sortPostsByTimestamp() {
         result: {}
     }
 }
+
+export function editPost(postId, postTitle, postBody) {
+    console.log(postId, postTitle, postBody);
+    return dispatch => {
+        return fetch(
+            ROOT_URL + POSTS + postId,
+            {
+                method: 'PUT',
+                headers: AUTHORIZATION_HEADERS,
+                body: JSON.stringify({
+                    title: postTitle,
+                    body: postBody
+                })
+            }
+        ).then(response => response.json())
+        .then(result => {
+            dispatch({
+                type: types.EDIT_POST,
+                result
+            })
+        })
+    }
+}

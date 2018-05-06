@@ -130,7 +130,7 @@ class PostDetails extends Component {
                             <br/><br/>
                             <Button bsStyle="primary" disabled={(this.state.commentAuthor && this.state.comment) ? false : true} onClick={this.addPostComment.bind(this)}>Add Comment</Button>
                             <br/>
-                            </div>}
+                        </div>}
                 </div>
             )}
 }

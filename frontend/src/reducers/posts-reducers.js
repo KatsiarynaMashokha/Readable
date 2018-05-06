@@ -33,6 +33,16 @@ export const PostsReducer = (state = [], action) => {
             return state.slice().sort((a, b) => {
                 return a.timestamp < b.timestamp
             })
+        case types.EDIT_POST:
+            let updatedPost = action.result;
+            postId = updatedPost.id;
+            return state.map(post => {
+                if(post.id === postId) {
+                    post.title = updatedPost.title,
+                    post.body = updatedPost.body
+                }
+                return post
+            })
         default:
             return state
     }
