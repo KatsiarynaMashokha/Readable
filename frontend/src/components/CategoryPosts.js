@@ -40,7 +40,10 @@ class CategoryPosts extends Component {
                 <Panel key={idx} className='post-panel'>
                     <Panel.Heading>{post.title}</Panel.Heading>
                     <Panel.Body>{post.body}</Panel.Body>
-                    <Panel.Footer>by {post.author} on {convertUnixTime(post.timestamp)}&nbsp;&nbsp;&nbsp;{post.voteScore} <Glyphicon onClick={this.upvote.bind(this, post.id)} glyph="glyphicon glyphicon-thumbs-up"></Glyphicon>&nbsp;&nbsp;<Glyphicon onClick={this.downvote.bind(this, post.id)} glyph="glyphicon glyphicon-thumbs-down"></Glyphicon>
+                    <Panel.Footer>by {post.author} on {convertUnixTime(post.timestamp)}&nbsp;&nbsp;&nbsp;{post.voteScore} <Glyphicon onClick={this.upvote.bind(this, post.id)} glyph="glyphicon glyphicon-thumbs-up"></Glyphicon>&nbsp;&nbsp;
+                    <Glyphicon onClick={this.downvote.bind(this, post.id)} glyph="glyphicon glyphicon-thumbs-down"></Glyphicon>&nbsp;&nbsp;&nbsp;
+                    {post.commentCount}&nbsp;<Glyphicon glyph="glyphicon glyphicon-comment"></Glyphicon>
+
                     </Panel.Footer>
                     <div className='post-action-btns'>
                         <Link to={post.category + '/edit/' + post.id} id='btn-edit' className='button'>Edit</Link>
