@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { fetchPostComments } from '../actions/CommentsActions';
 import { Glyphicon } from 'react-bootstrap';
 import { upvotePost,  downvotePost } from '../actions/PostsActions';
-import { upvoteComment,  downvoteComment, deleteComment, addPostComment } from '../actions/CommentsActions';
+import { upvoteComment,  downvoteComment, deleteComment, addPostComment, editComment } from '../actions/CommentsActions';
 import { DebounceInput } from "react-debounce-input";
 import v4 from 'uuid/v4';
 import { convertUnixTime } from '../util';
@@ -16,6 +16,9 @@ class PostDetails extends Component {
         this.state = {
             commentAuthor: '',
             comment: '',
+            editModeActivated: false,
+            editComment: '',
+            editCommentId: null,
         }
     }
     componentDidMount() {
@@ -43,9 +46,12 @@ class PostDetails extends Component {
         if(window.confirm('Are you sure you want to delete this comment?')) this.props.dispatch(deleteComment(commentId));
     }
 
-    editPostComment(commentId) {
-        console.log('editComment')
-
+    editPostComment(commentId, commentBody) {
+        this.setState({
+            editModeActivated: !this.state.editModeActivated,
+            editComment: commentBody,
+            editCommentId: commentId,
+        })
     }
 
     addPostComment() {
@@ -61,6 +67,16 @@ class PostDetails extends Component {
             this.setState({
                 commentAuthor: '',
                 comment: '',
+            })
+        })
+    }
+
+    updatePostComment() {
+        this.props.dispatch(editComment(this.state.editCommentId, this.state.editComment, Date.now())).then(() => {
+            this.setState({
+                editModeActivated: false,
+                editComment: '',
+                editCommentId: null,
             })
         })
     }
@@ -86,33 +102,37 @@ class PostDetails extends Component {
                 }   
                 
                    {this.props.comments && this.props.comments.map(comment => {
-                return <span key={comment.id}>
-                    <br/>
-                    <p className='comment-details'>{comment.author} on {convertUnixTime(comment.timestamp)}</p>
-                    <p className='comment-body'>{comment.body}</p>
-                    <span className='comment-votes'><Glyphicon onClick={this.upvotePostComment.bind(this, comment.id)} glyph="glyphicon glyphicon-thumbs-up"></Glyphicon>&nbsp;&nbsp;&nbsp;
-                       {comment.voteScore}&nbsp;&nbsp;&nbsp;
-                       <Glyphicon onClick={this.downvotePostComment.bind(this, comment.id)} glyph="glyphicon glyphicon-thumbs-down"></Glyphicon>&nbsp;&nbsp;&nbsp;
-                       <Glyphicon onClick={this.editPostComment.bind(this, comment.id)} glyph="glyphicon glyphicon-edit"></Glyphicon>&nbsp;&nbsp;&nbsp;
-                       <Glyphicon onClick={this.deletePostComment.bind(this, comment.id)} glyph="glyphicon glyphicon-remove"></Glyphicon>&nbsp;&nbsp;&nbsp;
+                       return <span key={comment.id}>
+                            <br/>
+                            <p className='comment-details'>{comment.author} on {convertUnixTime(comment.timestamp)}</p>
+                            <p className='comment-body'>{comment.body}</p>
+                            <span className='comment-votes'><Glyphicon onClick={this.upvotePostComment.bind(this, comment.id)} glyph="glyphicon glyphicon-thumbs-up"></Glyphicon>&nbsp;&nbsp;&nbsp;
+                            {comment.voteScore}&nbsp;&nbsp;&nbsp;
+                            <Glyphicon onClick={this.downvotePostComment.bind(this, comment.id)} glyph="glyphicon glyphicon-thumbs-down"></Glyphicon>&nbsp;&nbsp;&nbsp;
+                            <Glyphicon onClick={this.editPostComment.bind(this, comment.id, comment.body)} glyph="glyphicon glyphicon-edit"></Glyphicon>&nbsp;&nbsp;&nbsp;
+                            <Glyphicon onClick={this.deletePostComment.bind(this, comment.id)} glyph="glyphicon glyphicon-remove"></Glyphicon>&nbsp;&nbsp;&nbsp;
+                            </span>
                        </span>
-                    </span>
                     })}
-                    <br/>
-                    <br/>
-                    <div className='new-post-comment'>
-                        <DebounceInput debounceTimeout={300} type='text' name='author' value={this.state.commentAuthor} placeholder={'Author'} onChange={(e) => this.setState({ commentAuthor : e.target.value })}/>
-                        <br/>
-                        <br/>
-                        <DebounceInput debounceTimeout={300} element='textarea' name='comment' value={this.state.comment} placeholder={'Enter comment here'} onChange={(e) => this.setState({ comment: e.target.value })}/>
-                        <br/>
-                        <br/>
-                        <Button bsStyle="primary" onClick={this.addPostComment.bind(this)}>Add Comment</Button>
-                        <br/>
-                    </div>
+                    <br/><br/>
+
+                    {this.state.editModeActivated ? <span>
+                        <p className='edit-comment-title'>Edit your comment here:</p>
+                        <div className='new-post-comment'>
+                            <DebounceInput debounceTimeout={300} element='textarea' name='editCommentBody' value={this.state.editComment} onChange={(e) => this.setState({ editComment: e.target.value })}/>
+                            <br/><br/>
+                            <Button bsStyle="primary" onClick={this.updatePostComment.bind(this)} disabled={this.state.editComment ? false : true}>Update Comment</Button>
+                            <br/>
+                        </div></span> : <div className='new-post-comment'>
+                            <DebounceInput debounceTimeout={300} type='text' name='author' value={this.state.commentAuthor} placeholder={'Author'} required onChange={(e) => this.setState({ commentAuthor : e.target.value })}/>
+                            <br/><br/>
+                            <DebounceInput debounceTimeout={300} element='textarea' name='comment' value={this.state.comment} required={true} placeholder={'Enter comment here'} onChange={(e) => this.setState({ comment: e.target.value })}/>
+                            <br/><br/>
+                            <Button bsStyle="primary" disabled={(this.state.commentAuthor && this.state.comment) ? false : true} onClick={this.addPostComment.bind(this)}>Add Comment</Button>
+                            <br/>
+                            </div>}
                 </div>
-            )
-    }
+            )}
 }
 
 const mapStateToProps = state => ({

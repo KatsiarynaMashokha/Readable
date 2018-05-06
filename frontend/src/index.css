@@ -130,3 +130,10 @@ input, textarea {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.edit-comment-title {
+  margin-top: 25px;
+  color: #333333;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 20px;
+}

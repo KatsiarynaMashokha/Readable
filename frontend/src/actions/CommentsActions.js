@@ -94,3 +94,25 @@ export function addPostComment(comment) {
         })
     }
 }
+
+export function editComment(commentId, commentBody, timestamp) {
+    return dispatch => {
+        return fetch(
+            ROOT_URL + COMMENTS + commentId,
+            {
+                method: 'PUT',
+                headers: AUTHORIZATION_HEADERS,
+                body: JSON.stringify({
+                    timestamp: timestamp,
+                    body: commentBody
+                })
+            }
+        ).then(response => response.json())
+        .then(result => {
+            dispatch({
+                type: types.EDIT_COMMENT,
+                result: {...result}
+            })
+        })
+    }
+}
