@@ -110,7 +110,6 @@ export function sortPostsByTimestamp() {
 }
 
 export function editPost(postId, postTitle, postBody) {
-    console.log(postId, postTitle, postBody);
     return dispatch => {
         return fetch(
             ROOT_URL + POSTS + postId,
@@ -126,6 +125,23 @@ export function editPost(postId, postTitle, postBody) {
         .then(result => {
             dispatch({
                 type: types.EDIT_POST,
+                result
+            })
+        })
+    }
+}
+
+export function getPostDetails(postId) {
+    return dispatch => {
+        return fetch(
+            ROOT_URL + POSTS + postId,
+            {
+                headers: AUTHORIZATION_HEADERS
+            }
+        ).then(response => response.json())
+        .then(result => {
+            dispatch({
+                type: types.GET_POST_DETAILS,
                 result
             })
         })

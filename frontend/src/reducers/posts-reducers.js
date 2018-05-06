@@ -47,3 +47,12 @@ export const PostsReducer = (state = [], action) => {
             return state
     }
 }
+
+export const PostDetailsReducer = (state = [], action) => {
+    switch(action.type) {
+        case types.GET_POST_DETAILS:
+            return action.result;
+        default:
+            return state
+    }
+}

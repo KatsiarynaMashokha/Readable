@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { DebounceInput } from "react-debounce-input";
 import v4 from 'uuid/v4';
-import { createNewPost, editPost } from '../actions/PostsActions';
+import { createNewPost, editPost, getPostDetails } from '../actions/PostsActions';
 import { Button } from 'react-bootstrap';
 
 class PostForm extends Component {
@@ -15,8 +15,6 @@ class PostForm extends Component {
             let post = props.posts.filter(post => post.id === postId);
             this.state = {
                 id: postId,
-                title: post[0].title,
-                body: post[0].body,
             }
         } else {
             this.state = {
@@ -53,6 +51,18 @@ class PostForm extends Component {
         .then(() => {
              window.location = '/';
         })
+    }
+
+    componentDidMount() {
+        if (this.state.id) {
+            this.props.getPostDetails(this.state.id).then(result => {
+            }).then(() => {
+                this.setState({
+                    title: this.props.currentPostDetails.title,
+                    body: this.props.currentPostDetails.body,
+                })
+            })
+        }
     }
 
     updatePost() {
@@ -124,11 +134,13 @@ class PostForm extends Component {
 const mapStateToProps = state => ({
     posts: state.posts,
     categories: state.categories,
+    currentPostDetails: state.currentPostDetails,
 })
 
 const mapsDispatchToProps = (dispatch) => ({
     createNewPost: (post) => dispatch(createNewPost(post)),
     editPost: (postId, postTitle, postBody) => dispatch(editPost(postId, postTitle, postBody)),
+    getPostDetails: (postId) => dispatch(getPostDetails(postId)),
 })
 
 export default withRouter(connect(mapStateToProps, mapsDispatchToProps)(PostForm))
