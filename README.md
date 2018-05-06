@@ -1,22 +1,26 @@
-# Readable API Server
+# Readable
+#### Readable is a React app that was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
+## Description
+This app represents a discussion forum. The following functionality is available to the user:
+* Browse all the posts and posts per category
+* Sort posts by most recent and most voted
+* Create/Read/Edit/Delete post
+* Create/Read/Edit/Delete comments for the selected post
 
-This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
+## Setup/Installation Requirements
+1. Download or clone the following project from the Github by tapping "Download" or using `git clone` from the terminal.
 
-## Start Developing
+2. `cd` to `api-server` and run `npm install`, and `node server` to install and start the API server
 
-To get started developing right away:
-
-* Install and start the API server
-    - `cd api-server`
-    - `npm install`
-    - `node server`
-* In another terminal window, use Create React App to scaffold out the front-end
-    - `create-react-app frontend`
-    - `cd frontend`
-    - `npm start`
+3. `cd frontend` and run `npm start` in another terminal window
 
 ## API Server
 
 Information about the API server and how to use it can be found in its [README file](api-server/README.md).
+
+## Support and contact details
+For any concerns or questions email to: katsiarynamashokha@gmail.com
+
+### License
+Copyright (©) 2018 **_Katsiaryna Mashokha_**
