@@ -12,7 +12,6 @@ class PostForm extends Component {
 
         if(props.edit) {
             let postId = props.match.params.postId;
-            let post = props.posts.filter(post => post.id === postId);
             this.state = {
                 id: postId,
             }
@@ -80,26 +79,27 @@ class PostForm extends Component {
     }
 
     render() {
-
         return (
             <span>
                 <h4>{this.state.id ? 'Edit a post' : 'Add a new post'}</h4>
                 <br />
                 <br />
                 {this.state.id ? <span>
-                    <label>
-                        Title
-                        <DebounceInput debounceTimeout={300} type='text' name='editPostTitle' onChange={(e) => this.setState({ title: e.target.value })} value={this.state.title} required/>
-                    </label>
-                    <br /><br />
-                    <label>
-                        Post
-                        <DebounceInput debounceTimeout={300} element="textarea" forceNotifyByEnter = {false} onChange={(e) => this.setState({ body: e.target.value })} value={this.state.body} required/>
-                    </label>
-                    <br />
-                    <br />
-                    <Button bsStyle="primary" onClick={this.updatePost.bind(this)} disabled={(this.state.title && this.state.body) ? false : true}>Update Post</Button>
-                </span> : <span>
+                    {this.props.currentPostDetails.error ? <span>No post found</span> : <span>
+                        {Object.keys(this.props.currentPostDetails).length ? <span>
+                            <label>
+                            Title
+                                <DebounceInput debounceTimeout={300} type='text' name='editPostTitle' onChange={(e) => this.setState({ title: e.target.value })} value={this.state.title} required/>
+                            </label>
+                            <br /><br />
+                            <label>
+                            Post
+                                <DebounceInput debounceTimeout={300} element="textarea" forceNotifyByEnter = {false} onChange={(e) => this.setState({ body: e.target.value })} value={this.state.body} required/>
+                            </label>
+                            <br /><br />
+                            <br /><br />
+                            <Button bsStyle="primary" onClick={this.updatePost.bind(this)} disabled={(this.state.title && this.state.body) ? false : true}>Update Post</Button></span> : <span>The post has been deleted </span>}
+                    </span>}</span> : <span>
                     <label>
                         Title
                         <DebounceInput debounceTimeout={300} type='text' name='title' onChange={(e) => this.setState({ title: e.target.value })} value={this.state.title} required/>
