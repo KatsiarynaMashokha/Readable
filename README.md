@@ -13,7 +13,7 @@ This app represents a discussion forum. The following functionality is available
 
 2. `cd` to `api-server` and run `npm install`, and `node server` to install and start the API server
 
-3. `cd frontend` and run `npm start` in another terminal window
+3. `cd frontend` and run `npm install` and `npm start` in another terminal window
 
 ## API Server
 
