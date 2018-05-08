@@ -117,14 +117,15 @@ class PostForm extends Component {
                     <br /><br />
                     {this.props.categories.length && <label>
                         Category:&nbsp;
-                        <select value={this.props.categories[0].name} onChange={(e) => this.setState({ category: e.target.value })}>
+                        <select value={this.props.category} onChange={(e) => this.setState({ category: e.target.value })}>
+                            <option value="" disabled selected>Select category</option>
                             {this.props.categories.length && this.props.categories.map(category => {
                                 return <option value={category.name} key={category.name}>{category.name}</option>
                             })}
                         </select>
                     </label>}
                     <br /><br />
-                    <Button bsStyle="primary" type='submit' value='Submit' onClick={this.handleSudmit.bind(this)} disabled={(this.state.title && this.state.body && this.state.author) ? false : true}>Submit</Button>
+                    <Button bsStyle="primary" type='submit' value='Submit' onClick={this.handleSudmit.bind(this)} disabled={(this.state.title && this.state.body && this.state.author && this.state.category) ? false : true}>Submit</Button>
                 </span>}
             </span>
         )
