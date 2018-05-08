@@ -142,3 +142,11 @@ input, textarea {
 .categories-description {
   color: #696969;
 }
+
+.edit-post-icon, .edit-post-icon:hover, .glyphicon{
+  color: #333333
+}
+
+.glyphicon {
+  cursor: pointer;
+}

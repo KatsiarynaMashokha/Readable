@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { fetchPostComments } from '../actions/CommentsActions';
 import { Glyphicon } from 'react-bootstrap';
-import { upvotePost,  downvotePost } from '../actions/PostsActions';
+import { upvotePost, downvotePost, deletePost } from '../actions/PostsActions';
 import { upvoteComment,  downvoteComment, deleteComment, addPostComment, editComment } from '../actions/CommentsActions';
 import { DebounceInput } from "react-debounce-input";
 import v4 from 'uuid/v4';
@@ -21,6 +21,7 @@ class PostDetails extends Component {
             editCommentId: null,
         }
     }
+
     componentDidMount() {
         let postId = this.props.match.params.postId;
         this.props.dispatch(fetchPostComments(postId));
@@ -32,6 +33,12 @@ class PostDetails extends Component {
 
     downvotePost(postId) {
         this.props.dispatch(downvotePost(postId));
+    }
+
+    deletePost(postId) {
+        if (window.confirm('Are you sure you want to delete this post?')) this.props.dispatch(deletePost(postId)).then(() => {
+            window.location = '/';
+        });
     }
 
     upvotePostComment(commentId) {
@@ -93,7 +100,10 @@ class PostDetails extends Component {
                        <h4 className='post-body'>{currentPost.body}</h4>
                        <Glyphicon onClick={this.upvotePost.bind(this, currentPost.id)} glyph="glyphicon glyphicon-thumbs-up"></Glyphicon>&nbsp;&nbsp;&nbsp;
                        {currentPost.voteScore}&nbsp;&nbsp;&nbsp;
-                       <Glyphicon onClick={this.downvotePost.bind(this, currentPost.id)} glyph="glyphicon glyphicon-thumbs-down"></Glyphicon>
+                       <Glyphicon onClick={this.downvotePost.bind(this, currentPost.id)} glyph="glyphicon glyphicon-thumbs-down"></Glyphicon>&nbsp;&nbsp;&nbsp;
+                       <Link className='edit-post-icon' to={`/${currentPost.category}/edit/${currentPost.id}`}><Glyphicon glyph="glyphicon glyphicon-edit"/></Link>
+                       &nbsp;&nbsp;&nbsp;
+                       <Glyphicon onClick={this.deletePost.bind(this, currentPost.id)} glyph="glyphicon glyphicon-remove"></Glyphicon>
                        <br/>
                        <br/>
                        {this.props.comments.length ? <p>{this.props.comments.length} comment(s)</p> : <p>No Comments</p>}

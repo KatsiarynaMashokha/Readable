@@ -13,8 +13,8 @@ class CategoryPosts extends Component {
         }
     }
 
-    deletePost(postId) {
-        if (window.confirm('Are you sure you wont to delete this post?')) this.props.deletePost(postId);
+    deletePost(postId, postCategory) {
+        if (window.confirm('Are you sure you want to delete this post?')) this.props.deletePost(postId).then(() => window.location = `/${postCategory}`);
     }
 
     upvote(postId) {
@@ -47,7 +47,7 @@ class CategoryPosts extends Component {
                     </Panel.Footer>
                     <div className='post-action-btns'>
                         <Link to={post.category + '/edit/' + post.id} id='btn-edit' className='button'>Edit</Link>
-                        <a onClick={this.deletePost.bind(this, post.id)} id='btn-delete' className='button' >Delete</a>
+                        <a onClick={this.deletePost.bind(this, post.id, post.category)} id='btn-delete' className='button' >Delete</a>
                         <Link to={post.category + '/post/' + post.id}
                         id='btn-read' className='button'>Read More</Link>
                     </div>
