@@ -119,7 +119,7 @@ class PostForm extends Component {
                         Category:&nbsp;
                         <select value={this.props.category} onChange={(e) => this.setState({ category: e.target.value })}>
                             <option value="" disabled selected>Select category</option>
-                            {this.props.categories.length && this.props.categories.map(category => {
+                            {this.props.categories.length > 0 && this.props.categories.map(category => {
                                 return <option value={category.name} key={category.name}>{category.name}</option>
                             })}
                         </select>

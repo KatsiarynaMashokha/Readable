@@ -106,7 +106,7 @@ class PostDetails extends Component {
                        <Glyphicon onClick={this.deletePost.bind(this, currentPost.id)} glyph="glyphicon glyphicon-remove"></Glyphicon>
                        <br/>
                        <br/>
-                       {this.props.comments.length ? <p>{this.props.comments.length} comment(s)</p> : <p>No Comments</p>}
+                       {this.props.comments.length > 0 ? <p>{this.props.comments.length} comment(s)</p> : <p>No Comments</p>}
                        <hr/>
                    </span>
                 }   

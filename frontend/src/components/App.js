@@ -14,7 +14,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Welcome to Forum</h1>
-          {this.props.categories.length && <span className='categories-description'>We are discussing {this.props.categories.map(category => <Link to={`/${category.path}`} key={category.path}>{' ' + category.name}</Link>)}</span>}
+          {this.props.categories.length > 0 && <span className='categories-description'>We are discussing {this.props.categories.map(category => <Link to={`/${category.path}`} key={category.path}>{' ' + category.name}</Link>)}</span>}
           <nav>
               <Link to="/">Home</Link>
               <br />
@@ -22,12 +22,12 @@ class App extends Component {
           </nav>
         </header>
         <Main>
-          <Route exact path="/" component={PostsHome} />
-          <Route exact path="/:category" component={CategoryPosts}/>
+          <Route exact path="/" component={PostsHome} key={1} />
+          <Route exact path="/:category" component={CategoryPosts} key={2}/>
           <Route exact path="/:category/edit/:postId" render={props => (
-            <PostForm {...props} edit={true}/>)}/>
-          <Route exact path="/:posts/new" component={PostForm}/>
-          <Route exact path="/:category/post/:postId" component={PostDetails}/>
+            <PostForm {...props} edit={true}/>)} key={3}/>
+          <Route exact path="/:posts/new" component={PostForm} key={4}/>
+          <Route exact path="/:category/post/:postId" component={PostDetails} key={5}/>
         </Main>
       </div>
     );
