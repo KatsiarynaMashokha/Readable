@@ -7,9 +7,9 @@ export const PostsReducer = (state = [], action) => {
             return action.result;
         case types.CREATE_NEW_POST:
             let { post } = action;
-            return {
-                ...state, ...state.push(post)
-            }
+            return [
+                ...state, post
+            ]
         case types.DELETE_POST:
             postId = action.result.id;
             return state.filter(post => post.id !== postId);

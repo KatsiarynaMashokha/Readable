@@ -23,7 +23,7 @@ export const CommentsReducer = (state = [], action) => {
             return state.filter(comment => comment.id !== commentId);
         case types.ADD_POST_COMMENT:
             comment = action.result;
-            return [...state], [...state, comment]
+            return [...state, comment]
         case types.EDIT_COMMENT:
             let updatedComment = action.result;
             commentId = updatedComment.id;

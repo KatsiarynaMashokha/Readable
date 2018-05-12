@@ -48,7 +48,7 @@ class PostForm extends Component {
             })
         }).then(() => window.alert('New post has been added'))
         .then(() => {
-             window.location = '/';
+            this.props.history.push('/');
         })
     }
 
