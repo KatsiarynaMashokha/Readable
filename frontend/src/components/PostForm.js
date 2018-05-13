@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { DebounceInput } from "react-debounce-input";
-import v4 from 'uuid/v4';
+import { uuidv4 } from '../util';
 import { createNewPost, editPost, getPostDetails } from '../actions/PostsActions';
 import { Button } from 'react-bootstrap';
 import NoMatch from './NoMatch';
@@ -34,7 +34,7 @@ class PostForm extends Component {
             author: this.state.author,
             body: this.state.body,
             category: this.state.category,
-            id: v4(),
+            id: uuidv4(),
             timestamp: Date.now(),
             title: this.state.title,
         }

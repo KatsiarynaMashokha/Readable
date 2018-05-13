@@ -6,8 +6,7 @@ import { Glyphicon } from 'react-bootstrap';
 import { upvotePost, downvotePost, deletePost } from '../actions/PostsActions';
 import { upvoteComment,  downvoteComment, deleteComment, addPostComment, editComment } from '../actions/CommentsActions';
 import { DebounceInput } from "react-debounce-input";
-import v4 from 'uuid/v4';
-import { convertUnixTime } from '../util';
+import { convertUnixTime, uuidv4 } from '../util';
 import { Button } from 'react-bootstrap';
 import NoMatch from './NoMatch';
 
@@ -65,7 +64,7 @@ class PostDetails extends Component {
     addPostComment() {
         const postId = this.props.match.params.postId;
         const comment = {
-            id: v4(),
+            id: uuidv4(),
             timestamp: Date.now(),
             body: this.state.comment,
             author: this.state.commentAuthor,
