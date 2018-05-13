@@ -2,11 +2,13 @@ import * as types from '../constants/ActionTypes';
 
 export const PostsReducer = (state = [], action) => {
     let postId;
+    let updatedPost;
+    let post;
     switch(action.type) {
         case types.FETCH_ALL_POSTS:
             return action.result;
         case types.CREATE_NEW_POST:
-            const { post } = action;
+            post = action.post;
             return [
                 ...state, post
             ]
@@ -34,7 +36,7 @@ export const PostsReducer = (state = [], action) => {
                 return a.timestamp < b.timestamp
             })
         case types.EDIT_POST:
-            const updatedPost = action.result;
+            updatedPost = action.result;
             postId = updatedPost.id;
             return state.map(post => {
                 if(post.id === postId) {

@@ -3,6 +3,7 @@ import * as types from '../constants/ActionTypes';
 export const CommentsReducer = (state = [], action) => {
     let commentId;
     let comment;
+    let updatedComment;
     switch(action.type) {
         case types.FETCH_POST_COMMENTS:
             return action.result;
@@ -25,7 +26,7 @@ export const CommentsReducer = (state = [], action) => {
             comment = action.result;
             return [...state, comment]
         case types.EDIT_COMMENT:
-            const updatedComment = action.result;
+            updatedComment = action.result;
             commentId = updatedComment.id;
             return state.map(comment => {
                 if(comment.id === commentId) {
