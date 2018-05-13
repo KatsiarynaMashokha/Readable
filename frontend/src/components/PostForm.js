@@ -7,6 +7,14 @@ import { createNewPost, editPost, getPostDetails } from '../actions/PostsActions
 import { Button } from 'react-bootstrap';
 import NoMatch from './NoMatch';
 
+let defaultState = {
+    id: '',
+    author: '',
+    body: '',
+    category: '',
+    title: '',
+}
+
 class PostForm extends Component {
     constructor(props) {
         super(props);
@@ -17,14 +25,7 @@ class PostForm extends Component {
                 id: postId,
             }
         } else {
-            this.state = {
-                id: '',
-                title: '',
-                author: '',
-                body: '',
-                category: '',
-                timestamp: '',
-            }
+            this.state = {...defaultState, timestamp: ''}
         }
     }
 
@@ -41,11 +42,7 @@ class PostForm extends Component {
 
         this.props.createNewPost(post).then((result) => {
             this.setState({
-                id: '',
-                author: '',
-                body: '',
-                category: '',
-                title: '',
+                ...defaultState
             })
         }).then(() => window.alert('New post has been added'))
         .then(() => {
