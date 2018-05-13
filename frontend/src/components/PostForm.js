@@ -5,6 +5,7 @@ import { DebounceInput } from "react-debounce-input";
 import v4 from 'uuid/v4';
 import { createNewPost, editPost, getPostDetails } from '../actions/PostsActions';
 import { Button } from 'react-bootstrap';
+import NoMatch from './NoMatch';
 
 class PostForm extends Component {
     constructor(props) {
@@ -74,7 +75,7 @@ class PostForm extends Component {
             })
         }).then(() => window.alert('Post has been updated'))
         .then(() => {
-            window.location = `/${this.props.match.params.category}`;
+            this.props.history.push(`/${this.props.match.params.category}`);
         })
     }
 
@@ -85,7 +86,7 @@ class PostForm extends Component {
                 <br />
                 <br />
                 {this.state.id ? <span>
-                    {this.props.currentPostDetails.error ? <span>No post found</span> : <span>
+                    {this.props.currentPostDetails.error ? <NoMatch location={this.props.location}/> : <span>
                         {Object.keys(this.props.currentPostDetails).length ? <span>
                             <label>
                             Title
@@ -98,7 +99,7 @@ class PostForm extends Component {
                             </label>
                             <br /><br />
                             <br /><br />
-                            <Button bsStyle="primary" onClick={this.updatePost.bind(this)} disabled={(this.state.title && this.state.body) ? false : true}>Update Post</Button></span> : <span>The post has been deleted </span>}
+                            <Button bsStyle="primary" onClick={this.updatePost.bind(this)} disabled={(this.state.title && this.state.body) ? false : true}>Update Post</Button></span> : <NoMatch location={this.props.location}/>}
                     </span>}</span> : <span>
                     <label>
                         Title

@@ -9,6 +9,7 @@ import { DebounceInput } from "react-debounce-input";
 import v4 from 'uuid/v4';
 import { convertUnixTime } from '../util';
 import { Button } from 'react-bootstrap';
+import NoMatch from './NoMatch';
 
 class PostDetails extends Component {
     constructor(props) {
@@ -36,9 +37,9 @@ class PostDetails extends Component {
     }
 
     deletePost(postId) {
-        if (window.confirm('Are you sure you want to delete this post?')) this.props.dispatch(deletePost(postId)).then(() => {
-            window.location = '/';
-        });
+        if (window.confirm('Are you sure you want to delete this post?')) {
+            this.props.dispatch(deletePost(postId)).then(() => this.props.history.push(`/${this.props.match.params.category}`))
+        }
     }
 
     upvotePostComment(commentId) {
@@ -93,7 +94,7 @@ class PostDetails extends Component {
         let currentPost = (this.props.posts.filter(post => post.id === postId))[0];
             return (
                 <div>
-                   {currentPost && 
+                   {currentPost ?
                    <span>
                        <h3 className='post-title'>{currentPost.title}</h3>
                        <p className='post-details'>submitted on {convertUnixTime(currentPost.timestamp)} by {currentPost.author}</p>
@@ -108,8 +109,6 @@ class PostDetails extends Component {
                        <br/>
                        {this.props.comments.length > 0 ? <p>{this.props.comments.length} comment(s)</p> : <p>No Comments</p>}
                        <hr/>
-                   </span>
-                }   
                 
                    {this.props.comments && this.props.comments.map(comment => {
                        return <span key={comment.id}>
@@ -141,6 +140,8 @@ class PostDetails extends Component {
                             <Button bsStyle="primary" disabled={(this.state.commentAuthor && this.state.comment) ? false : true} onClick={this.addPostComment.bind(this)}>Add Comment</Button>
                             <br/>
                         </div>}
+                        </span> : <NoMatch location={this.props.location}/>
+                        }
                 </div>
             )}
 }

@@ -22,12 +22,12 @@ class App extends Component {
           </nav>
         </header>
         <Main>
-          <Route exact path="/" component={PostsHome} key={1} />
-          <Route exact path="/:category" component={CategoryPosts} key={2}/>
-          <Route exact path="/:category/edit/:postId" render={props => (
-            <PostForm {...props} edit={true}/>)} key={3}/>
-          <Route exact path="/:posts/new" component={PostForm} key={4}/>
-          <Route exact path="/:category/post/:postId" component={PostDetails} key={5}/>
+            <Route exact path="/" component={PostsHome} key={1} />
+            <Route exact path="/:category" component={CategoryPosts} key={2}/>
+            <Route exact path="/:category/edit/:postId" render={props => (
+              <PostForm {...props} edit={true}/>)} key={3}/>
+            <Route exact path="/:posts/new" component={PostForm} key={4}/>
+            <Route exact path="/:category/post/:postId" component={PostDetails} key={5}/>
         </Main>
       </div>
     );

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { deletePost, upvotePost, downvotePost} from '../actions/PostsActions';
 import PostComponent from './PostComponent';
 
 export class CategoryPosts extends Component {
@@ -29,10 +28,4 @@ const mapStateToProps = state => ({
     posts: state.posts
 });
 
-const mapDispatchToProps = dispatch => ({
-    deletePost: (postId) => dispatch(deletePost(postId)),
-    upvotePost: (postId) => dispatch(upvotePost(postId)),
-    downvotePost: (postId) => dispatch(downvotePost(postId)),
-})
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CategoryPosts));
+export default withRouter(connect(mapStateToProps)(CategoryPosts));
