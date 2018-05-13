@@ -13,6 +13,8 @@ class Categories extends Component {
         this.state = {
             selectValue: '' 
         }
+        this.readPosts =  this.readPosts.bind(this);
+        this.updateValue =  this.updateValue.bind(this);
     }  
 
     updateValue(newValue) {
@@ -49,12 +51,12 @@ class Categories extends Component {
                 clearable={true}
                 name="selected-state"
                 value={this.state.selectValue}
-                onChange={this.updateValue.bind(this)} 
+                onChange={this.updateValue}
                 searchable={true}
                 disabled={false}
                 placeholder="Categories"
             />
-            <Button className="get-posts" bsStyle="primary" onClick={this.readPosts.bind(this)}>Read Posts</Button>
+            <Button className="get-posts" bsStyle="primary" onClick={this.readPosts}>Read Posts</Button>
             <div className='sort-buttons'>
                 <p>Sort by:</p>
                 <Button className='sort-btn' onClick={this.props.sortPostsByTimestamp}>most recent</Button>
