@@ -24,7 +24,7 @@ class PostDetails extends Component {
     }
 
     componentDidMount() {
-        let postId = this.props.match.params.postId;
+        const postId = this.props.match.params.postId;
         this.props.dispatch(fetchPostComments(postId));
     }
 
@@ -63,8 +63,8 @@ class PostDetails extends Component {
     }
 
     addPostComment() {
-        let postId = this.props.match.params.postId;
-        let comment = {
+        const postId = this.props.match.params.postId;
+        const comment = {
             id: v4(),
             timestamp: Date.now(),
             body: this.state.comment,
@@ -90,8 +90,8 @@ class PostDetails extends Component {
     }
 
     render() {
-        let postId = this.props.match.params.postId;
-        let currentPost = (this.props.posts.filter(post => post.id === postId))[0];
+        const postId = this.props.match.params.postId;
+        const currentPost = (this.props.posts.filter(post => post.id === postId))[0];
             return (
                 <div>
                    {currentPost ?

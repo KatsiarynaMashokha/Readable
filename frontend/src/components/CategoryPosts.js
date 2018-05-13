@@ -14,8 +14,8 @@ export class CategoryPosts extends Component {
             );
         }
 
-        let selectedCategory = this.props.location.pathname.replace(/\//g,'');
-        let postsForCategory = this.props.posts.filter(post => post.category === selectedCategory);
+        const selectedCategory = this.props.location.pathname.replace(/\//g,'');
+        const postsForCategory = this.props.posts.filter(post => post.category === selectedCategory);
         return (
             <div>{postsForCategory.length ? postsForCategory.map((post) =>
                 <PostComponent post={post} key={post.id}/>) : 'No posts in this category'}

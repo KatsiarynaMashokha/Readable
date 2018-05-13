@@ -25,7 +25,7 @@ export const CommentsReducer = (state = [], action) => {
             comment = action.result;
             return [...state, comment]
         case types.EDIT_COMMENT:
-            let updatedComment = action.result;
+            const updatedComment = action.result;
             commentId = updatedComment.id;
             return state.map(comment => {
                 if(comment.id === commentId) {

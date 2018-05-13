@@ -12,7 +12,7 @@ class PostForm extends Component {
         super(props);
 
         if(props.edit) {
-            let postId = props.match.params.postId;
+            const postId = props.match.params.postId;
             this.state = {
                 id: postId,
             }
@@ -30,7 +30,7 @@ class PostForm extends Component {
 
     handleSudmit(e) {
         e.preventDefault();
-        let post = {
+        const post = {
             author: this.state.author,
             body: this.state.body,
             category: this.state.category,

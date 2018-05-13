@@ -32,7 +32,7 @@ class Categories extends Component {
             return <div>Loading...</div>
         }
 
-        let options = this.props.categories.map((category) => 
+        const options = this.props.categories.map((category) =>
             ({ value: category.name, label: category.name }));
 
         return (

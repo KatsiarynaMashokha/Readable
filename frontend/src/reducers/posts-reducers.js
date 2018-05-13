@@ -6,7 +6,7 @@ export const PostsReducer = (state = [], action) => {
         case types.FETCH_ALL_POSTS:
             return action.result;
         case types.CREATE_NEW_POST:
-            let { post } = action;
+            const { post } = action;
             return [
                 ...state, post
             ]
@@ -34,7 +34,7 @@ export const PostsReducer = (state = [], action) => {
                 return a.timestamp < b.timestamp
             })
         case types.EDIT_POST:
-            let updatedPost = action.result;
+            const updatedPost = action.result;
             postId = updatedPost.id;
             return state.map(post => {
                 if(post.id === postId) {
