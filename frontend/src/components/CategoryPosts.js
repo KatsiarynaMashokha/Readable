@@ -24,8 +24,8 @@ export class CategoryPosts extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    posts: state.posts
+const mapStateToProps = ({ posts }) => ({
+    posts,
 });
 
 export default withRouter(connect(mapStateToProps)(CategoryPosts));

@@ -18,8 +18,8 @@ class Main extends Component {
         )
     }
 }
-const mapStateToProps = state => ({
-    posts: state.posts,
+const mapStateToProps = ({ posts }) => ({
+    posts,
  });
 
 const mapDispatchToProps = dispatch => ({

@@ -145,9 +145,9 @@ class PostDetails extends Component {
             )}
 }
 
-const mapStateToProps = state => ({
-    comments: state.comments,
-    posts: state.posts,
+const mapStateToProps = ({ comments, posts }) => ({
+    comments,
+    posts,
 });
 
 export default withRouter(connect(mapStateToProps)(PostDetails));

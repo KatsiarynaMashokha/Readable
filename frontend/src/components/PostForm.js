@@ -133,10 +133,10 @@ class PostForm extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    posts: state.posts,
-    categories: state.categories,
-    currentPostDetails: state.currentPostDetails,
+const mapStateToProps = ({ posts, categories, currentPostDetails }) => ({
+    posts,
+    categories,
+    currentPostDetails,
 })
 
 const mapsDispatchToProps = (dispatch) => ({
